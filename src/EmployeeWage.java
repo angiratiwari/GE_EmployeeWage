@@ -27,6 +27,7 @@ public class EmployeeWage {
 
         // UC 6: Calculate Wages till Condition is Reached
         calculateWagesTillCondition();
+
     }
     // UC 1: Check Employee Attendance
     private static void checkEmployeeAttendance() {
@@ -103,5 +104,31 @@ public class EmployeeWage {
         System.out.println("Total Working Hours: " + totalHours);
         System.out.println("Total Wage Earned: " + totalWage);
     }
+
+    // UC 7: Refactor Code to Write a Class Method to Compute Employee Wage
+    private static int computeEmployeeWage(int totalWorkingDays, int maxWorkingHours) {
+        int totalHours = 0, totalDays = 0, totalWage = 0;
+
+        while (totalHours <= maxWorkingHours && totalDays < totalWorkingDays) {
+            totalDays++;
+            int empType = new Random().nextInt(3); // 0: Absent, 1: Full-Time, 2: Part-Time
+            int empHours = (empType == 1) ? FULL_DAY_HOUR : (empType == 2) ? PART_TIME_HOUR : 0;
+
+            totalHours += empHours;
+            totalWage += WAGE_PER_HOUR * empHours;
+
+            if (totalHours > maxWorkingHours) {
+                break;
+            }
+        }
+
+        System.out.println("=== Employee Wage Computation Summary ===");
+        System.out.println("Total Working Days: " + totalDays);
+        System.out.println("Total Working Hours: " + totalHours);
+        System.out.println("Total Wage Earned: " + totalWage);
+
+        return totalWage;
+    }
+
 }
 
